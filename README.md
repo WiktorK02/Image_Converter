@@ -1,6 +1,6 @@
 # Image Converter to oled display ssd1306 128x64
 ## How does it works:
-Basically the algorithm should take an image and return optimazed hex array with full code ready to copy and use in Arduino IDE
+Basically the algorithm should take an image and return optimazed hex array with full code ready to copy and put into Arduino IDE
 ## To do:
 •Conver jpg to ppm<br>
 •Resize photo to 128x64<br>

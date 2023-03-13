@@ -7,7 +7,7 @@ int main()
     ifstream image;
     ofstream newimage;
 
-    image.open("logo2_white2.ppm");
+    image.open("image.ppm");
     newimage.open("newimage.ppm");
 
     string type = "", width = "", height = "", RGB = "";

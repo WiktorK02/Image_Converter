@@ -2,6 +2,7 @@
 ## How does it works:
 Basically the algorithm should take an image and return optimazed hex array with full code ready to copy and put into Arduino IDE
 ## To do:
+• Add comments<br>
 • Conver jpg to ppm<br>
 • Resize photo to 128x64<br>
 • Return full copyable code to insert to Arduino IDE<br>

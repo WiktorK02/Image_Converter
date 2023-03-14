@@ -13,7 +13,7 @@ int main()
 {
 	Mat image;
 	image = imread("Resized.png", IMREAD_UNCHANGED);
-    resize(image, image, Size(128, 64), INTER_LINEAR);
+    	resize(image, image, Size(128, 64), INTER_LINEAR);
 	//im = imwrite("Resized.png", image);//save file 
 	int itterator = 0;
 	uint8_t* pixelPtr = (uint8_t*)image.data;

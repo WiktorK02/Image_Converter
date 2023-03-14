@@ -3,15 +3,16 @@
 Basically the algorithm should take an image and return optimazed hex array with full code ready to copy and put into Arduino IDE
 ## To do:
 • Add comments<br>
-• Conver jpg to ppm<br>
-• Resize photo to 128x64<br>
+• Int to Hexa convertion<br>
+• Update new file with changed image<br>
 • Return full copyable code to insert to Arduino IDE<br>
 • Make a website with the convertion algorithm which return easy and optimazed code that is ready to put into Arduino
 ## What is done:
 • Read and open image file<br>
-• Update new file with changed image<br>
-• Int to Hexa convertion<br>
+• Resize any photo to 128x64 and then to ASCII(updated)<br>
+• Conver jpg to ppm(updated)<br>
 ## What I learned:
 • Fstream library<br>
 • Working with file and image<br>
 • PPM image structure<br>
+• Basic of OpenCV library<br>

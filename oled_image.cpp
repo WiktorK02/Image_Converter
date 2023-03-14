@@ -1,75 +1,45 @@
-﻿#include <sstream>
-#include <fstream>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/imgcodecs.hpp>
 #include <iostream>
+#include <sstream>
+#include <fstream>
+
+using namespace cv;
 using namespace std;
+
 int main()
 {
-    ifstream image;
-    ofstream newimage;
+	Mat image;
+	image = imread("Resized.png", IMREAD_UNCHANGED);
+    resize(image, image, Size(128, 64), INTER_LINEAR);
+	//im = imwrite("Resized.png", image);//save file 
+	int itterator = 0;
+	uint8_t* pixelPtr = (uint8_t*)image.data;
+	int cn = image.channels();
+	Scalar_<uint8_t> bgrPixel;
+	for (int i = 0; i < image.rows; i++)
+	{
+		int k;
+		for (int j = 0; j < image.cols; j++)
+		{
+			bgrPixel.val[0] = pixelPtr[i * image.cols * cn + j * cn + 0]; // B
+			bgrPixel.val[1] = pixelPtr[i * image.cols * cn + j * cn + 1]; // G
+			bgrPixel.val[2] = pixelPtr[i * image.cols * cn + j * cn + 2]; // R
 
-    image.open("image.ppm");
-    newimage.open("newimage.ppm");
+			// do something with BGR values...
+			if(bgrPixel.val[0] == 255 && bgrPixel.val[1] == 255 && bgrPixel.val[2] == 255){
+				k = 0;
+				cout << k;
+			}
+			else {
+				k = 1;
+				cout << k;
+			}
+		}
+	}
 
-    string type = "", width = "", height = "", RGB = "";
-    image >> type;
-    image >> width;
-    image >> height;
-    image >> RGB;
 
-   /* if (width != "128" && height != "64") {
-        std::cout << "error";
-        return 0;
-    }*/
-
-    newimage << type << endl;
-    newimage << width << " " << height << endl;
-    newimage << RGB << endl;
-
-    string red = "", green = "", blue = "";
-    int r = 0, b = 0, g = 0;
-    int itterator = 0;
-
-    while (!image.eof()) {
-        image >> red;
-        image >> green;
-        image >> blue;
-
-        stringstream redstream(red);
-        stringstream greenstream(green);
-        stringstream bluestream(blue);
-
-        redstream >> r;
-        greenstream >> g;
-        bluestream >> b;
-
-        std::ostringstream rr;
-        rr << "0x" << std::hex << r;
-        std::string resultred = rr.str();
-        std::ostringstream gg;
-        gg << "0x" << std::hex << g;
-        std::string resultgreen = gg.str();
-        std::ostringstream bb;
-        bb << "0x" << std::hex << b;
-        std::string resultblue = bb.str();
-
-        if (resultred == "0xff") {
-            resultred = "0x00";
-        }
-        if (resultgreen == "0xff") {
-            resultgreen = "0x00";
-        }
-        if (resultblue == "0xff") {
-            resultblue = "0x00";
-        }
-        itterator++;
-        newimage << resultred << "," /* << resultgreen << "," << resultblue*/;
-        if (itterator == 128) {
-            newimage << std::endl;
-            itterator = 0;
-        }
-    }
-    image.close();
-    newimage.close();
-    //cout << type << width << height << RGB<<endl;
-    return 0;
+	return 0;
 }

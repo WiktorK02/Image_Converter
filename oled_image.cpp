@@ -27,7 +27,7 @@ int main()
 			bgrPixel.val[0] = pixelPtr[i * image.cols * cn + j * cn + 0]; // B
 			bgrPixel.val[1] = pixelPtr[i * image.cols * cn + j * cn + 1]; // G
 			bgrPixel.val[2] = pixelPtr[i * image.cols * cn + j * cn + 2]; // R
-
+			//bgrPixel.val[3] = pixelPtr[i * image.cols * cn + j * cn + 3];transparecy?
 			// do something with BGR values...
 			if(bgrPixel.val[0] == 255 && bgrPixel.val[1] == 255 && bgrPixel.val[2] == 255){
 				k = 0;

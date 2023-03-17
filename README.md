@@ -4,7 +4,7 @@ Basically the algorithm should take an image and return optimazed hex array with
 By now algorithm pass bitmap array tests.
 ## To do:
 • Return full copyable code to insert to Arduino IDE<br>
-• GUI app which return easy and optimazed code that is ready to put into Arduino(updated)
+• GUI app which returns an easy and optimazed code that is ready to put into Arduino(updated)
 ## What is done:
 • Read and open image file<br>
 • Resize any photo to 128x64 and then to ASCII(updated)<br>

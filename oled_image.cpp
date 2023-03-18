@@ -7,22 +7,50 @@
 #include <fstream>
 #include <bitset>
 #include <iomanip>
+
+#define IMAGE_WIDTH 128
+#define IMAGE_HEIGHT 64
+
 using namespace cv;
 using namespace std;
+
+void coutbyte(string array, int itterator, int image_width, int image_height) {
+
+	std::string binaryStr = array; // binary string
+	std::bitset<8> binary(binaryStr); // convert to bitset
+
+	// convert bitset to integer and cast to unsigned int
+	unsigned int decimal = static_cast<unsigned int>(binary.to_ulong());
+
+	// output as hex with leading 0x and leading zeroes if needed
+	std::stringstream hexStream;
+	hexStream << "0x" << std::setfill('0') << std::setw(2) << std::hex << decimal;
+	std::string hexStr = hexStream.str();
+	
+	//in order to return c++ array
+	if(itterator == image_height * image_width){
+		std::cout << hexStr;
+	}
+	else{ 
+		std::cout << hexStr << ", ";
+	}
+}
 
 int main()
 {
 	Mat image;
-	image = imread("beans.png", IMREAD_UNCHANGED);
-	resize(image, image, Size(128, 64), INTER_LINEAR);
+	image = imread("logo.png", IMREAD_UNCHANGED);
+	resize(image, image, Size(IMAGE_WIDTH, IMAGE_HEIGHT), INTER_LINEAR);
 	uint8_t* pixelPtr = (uint8_t*)image.data;
 	int cn = image.channels();
 	Scalar_<uint8_t> bgrPixel;
 
 	int itterator = 1;
-	int bititterator = 0;
+	int byteitterator = 0;
 	char valueofpixel;
 	string arr;
+	
+	cout << "const unsigned char "/*name of file here*/"[] PROGMEM = {"<<endl;
 	
 	for (int i = 0; i < image.rows; i++)
 	{
@@ -36,7 +64,7 @@ int main()
 
 			if (bgrPixel.val[3] == 0) {
 				
-				valueofpixel = '1';
+				valueofpixel = '1';//if transparency = 0 return 1, else return 0
 				arr.push_back(valueofpixel);//push to 8-bit array
 			}
 			else {
@@ -45,35 +73,28 @@ int main()
 				arr.push_back(valueofpixel);
 			}
 			
-			//every 8 bits
+			//every 8 bits print hex number
 			if (itterator % 8 == 0) {
-
-				std::string binaryStr = arr; // binary string
-				std::bitset<8> binary(binaryStr); // convert to bitset
-
-				// convert bitset to integer and cast to unsigned int
-				unsigned int decimal = static_cast<unsigned int>(binary.to_ulong());
-
-				// output as hex with leading 0x and leading zeroes if needed
-				std::stringstream hexStream;
-				hexStream << "0x" << std::setfill('0') << std::setw(2) << std::hex << decimal;
-				std::string hexStr = hexStream.str();
-				std::cout << hexStr << ", ";
-
+ 				coutbyte(arr, itterator, IMAGE_WIDTH, IMAGE_HEIGHT);
 				arr = ""; // for next hexdecimal number
-				bititterator += 1;
+				byteitterator += 1;
 
 			}
-			//endl every 16 hex numbers
-			if (bititterator == 16) {
+			//endl every 16 numbers
+			if (itterator % 128 == 0) {
+				
 				cout << endl;
-				bititterator = 0;
+			}
+			//tab every new line
+			if (itterator % 128 == 1) {
+
+				cout << "\t";
 			}
 
 			itterator++;
 		}
 	}
-
+	cout << "};";//close array 
 
 	return 0;
 }

@@ -9,6 +9,7 @@ By now algorithm pass bitmap array tests.
 • Resize any photo to 128x64 and then to ASCII(updated)<br>
 • Convertion transparent pixels and not transparent pixels to 0 and 1 Ascii representation<br>
 • 8-bit to one byte conversion<br>
+• Different pixel write depending on the image format(if .jpg check brightness if .png check transparency)<br>
 • Output as full hexa bitmap array <br>
 • Return full copyable code to insert to Arduino IDE<br>
 • Conver jpg to ppm(deleted in order to speed up the code)<br>
